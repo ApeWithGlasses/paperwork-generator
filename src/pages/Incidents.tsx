@@ -153,7 +153,7 @@ const Incidents = () => {
                         <input type="text" value={supervisor} onChange={(e) => setSupervisor(e.target.value)}/>
 
                         <h4>Formulario</h4>
-                        <span className="warning">Deje en blanco los espacios que no son aplicables.</span>
+                        <span className="warning">Deje en blanco los espacios que no sean aplicables en su caso.</span>
 
                         <div className="basic--information">
                             <label htmlFor="arrestedAdults">Adultos Arrestados</label>
