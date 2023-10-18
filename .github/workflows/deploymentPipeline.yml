@@ -28,11 +28,12 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v1
       with:
-        # Upload dist repository
         path: './dist'
     - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v1
+      uses: crazy-max/ghaction-github-pages@v4
       with:
-        token: ${{ secrets.DEPLOY_TOKEN }}
+        target_branch: gh-pages
+        build_dir: public
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
