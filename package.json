@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && echo apewithglasses.me > ./dist/CNAME",
+    "build": "vite build && echo apewithglasses.me > ./dist/CNAME",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
