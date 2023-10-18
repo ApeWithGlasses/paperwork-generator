@@ -1,7 +1,37 @@
-import { useState } from "react"
+import { useState, ChangeEvent } from "react"
+
+import Swal from "sweetalert2"
+
 import Navbar from "../components/Navbar"
 
 const Incidents = () => {
+    const copyCode = () => {
+        const code = document.querySelector('.bbcode') as HTMLDivElement;
+        const textArea = document.createElement('textarea');
+        textArea.value = code.innerText;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Texto copiado correctamente',
+            showConfirmButton: false,
+            timer: 1500
+        });
+    }
+
+    const [textareas, setTextareas] = useState(['', '']);
+
+    const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>, index: number) => {
+        const newTextareas = [...textareas];
+        newTextareas[index] = e.target.value;
+        setTextareas(newTextareas);
+        e.target.style.height = 'auto';
+        e.target.style.height = `${Math.max(e.target.scrollHeight, 20)}px`;
+    };
+
     // Basic Information
     const [adultsArrested, setAdultsArrested] = useState(0);
     const [classification, setClassification] = useState('');
@@ -281,92 +311,98 @@ const Incidents = () => {
                             <label htmlFor="damagesVehicleTwo">Descripción de los daños</label>
                             <textarea name="damagesVehicleTwo" id="damagesVehicleTwo"></textarea>
                         </div>
-
+                        
                         <div className="incident--narrative">
                             <label htmlFor="incidentNarrative">Narrativa del incidente</label>
-                            <textarea name="incidentNarrative" id="incidentNarrative"></textarea>
+                            <textarea name="incidentNarrative" id="incidentNarrative" onChange={(e) => handleTextChange(e, 0)}>
+                            </textarea>
                         </div>
 
                         <div className="evidence">
                             <label htmlFor="evidence">Sección de evidencias</label>
-                            <textarea name="evidence" id="evidence"></textarea>
+                            <textarea name="evidence" id="evidence" onChange={(e) => handleTextChange(e, 1)}>
+                            </textarea>
                         </div>
                     </form>
                 </div>
-                <div className="bbcode">
-                    [Textarea]<br />
-                    [divbox=#3D6641]<br />
-                    [br]<br />
-                    [color=#FFFFFF]<br />
-                    [center]COUNTY OF LOS SANTOS SHERIFF'S DEPARTMENT[/center]<br />
-                    [align=center][b]REPORTE DE INCIDENTE[/b][/align]<br />
-                    [right][size=70][b]FECHA:[/b][/size][color=transparent]--[/color]10/17/2023[/right]<br />
-                    [/color]<br />
-                    [/divbox]<br />
-                    [size=70][color=transparent]---[/color]A TRADITION OF SERVICE[/size]<br />
-                    [br]<br />
-                    [Textarea]<br />
-                    [size=85][b]# ADULTOS ARRESTADOS:[/b][/size] 1<br />
-                    [size=85][b]CLASIFICACIÓN:[/b][/size] Homicidio<br />
-                    [size=85][b]FECHA/HORA/DÍA DE LO OCURRIDO:[/b][/size] 10-17-23, 1648, Martes<br />
-                    [size=85][b]DIRECCIÓN DE LO OCURRIDO:[/b][/size] 2363 Vespucci Boulevard, SA 97321<br />
-                    [size=85][b]NOMBRE DEL LUGAR (SI APLICA):[/b][/size] Bean Machine<br />
-                    [/Textarea]<br />
-                    [br]<br />
-                    [b][size=75]CÓDIGO: [color=transparent]--[/color] V - VÍCTIMA [color=transparent]--[/color] ° [color=transparent]--[/color] T - TESTIGO [color=transparent]--[/color] ° [color=transparent]--[/color] I - INFORMANTE[/size][/b]<br />
-                    [Textarea]<br />
-                    [size=85][b]CÓDIGO:[/b][/size] V<br />
-                    [size=85][b]APELLIDO:[/b][/size] Doe [color=transparent]--[/color] [size=85][b]NOMBRE:[/b][/size] John [color=transparent]--[/color] [size=85][b]SEXO:[/b][/size] Masculino [color=transparent]--[/color] [size=85][b]EDAD:[/b][/size] 37<br />
-                    [size=85][b]DIRECCIÓN DE RESIDENCIA:[/b][/size] 4565 Mangellan Avenue<br />
-                    [size=85][b]VÍCTIMA DE LAS OFENSAS:[/b][/size] Homicidio<br />
-                    [/Textarea]<br />
-                    [Textarea]<br />
-                    [size=85][b]CÓDIGO:[/b][/size] V<br />
-                    [size=85][b]APELLIDO:[/b][/size] Doe [color=transparent]--[/color] [size=85][b]NOMBRE:[/b][/size] John [color=transparent]--[/color] [size=85][b]SEXO:[/b][/size] Masculino [color=transparent]--[/color] [size=85][b]EDAD:[/b][/size] 37<br />
-                    [size=85][b]DIRECCIÓN DE RESIDENCIA:[/b][/size] 4565 Mangellan Avenue<br />
-                    [size=85][b]VÍCTIMA DE LAS OFENSAS:[/b][/size] Homicidio<br />
-                    [/Textarea]<br />
-                    [br]<br />
-                    [b][size=75]CÓDIGO: [color=transparent]--[/color] S - SOSPECHOSO [color=transparent]--[/color] ° [color=transparent]--[/color] P - PACIENTE [color=transparent]--[/color][/size][/b]<br />
-                    [Textarea]<br />
-                    [size=85][b]CÓDIGO:[/b][/size] S<br />
-                    [size=85][b]APELLIDO:[/b][/size] Doe [color=transparent]--[/color] [size=85][b]NOMBRE:[/b][/size] John [color=transparent]--[/color] [size=85][b]SEXO:[/b][/size] Masculino [color=transparent]--[/color] [size=85][b]EDAD:[/b][/size] 37<br />
-                    [size=85][b]DIRECCIÓN DE RESIDENCIA:[/b][/size] 4565 Mangellan Avenue<br />
-                    [hr][/hr]<br />
-                    [size=85][b]CARGOS:[/b][/size] 187 PC [color=transparent]--[/color] [size=85][b]NÚMERO DE BOOKING:[/b][/size] 65415<br />
-                    [/Textarea]<br />
-                    [Textarea]<br />
-                    [size=85][b]CÓDIGO:[/b][/size] S<br />
-                    [size=85][b]APELLIDO:[/b][/size] Doe [color=transparent]--[/color] [size=85][b]NOMBRE:[/b][/size] John [color=transparent]--[/color] [size=85][b]SEXO:[/b][/size] Masculino [color=transparent]--[/color] [size=85][b]EDAD:[/b][/size] 37<br />
-                    [size=85][b]DIRECCIÓN DE RESIDENCIA:[/b][/size] 4565 Mangellan Avenue<br />
-                    [hr][/hr]<br />
-                    [size=85][b]CARGOS:[/b][/size] 187 PC [color=transparent]--[/color] [size=85][b]NÚMERO DE BOOKING:[/b][/size] 65415<br />
-                    [/Textarea]<br />
-                    [br]<br />
-                    [Textarea]<br />
-                    [size=85][b]POR EL EMPLEADO:[/b][/size] Lopez, E. [color=transparent]--[/color] [size=85][b]NÚMERO DE EMPLEADO:[/b][/size] 51451 [color=transparent]--[/color] [size=85][b]UNIDAD/CARRO #:[/b][/size] 281A<br />
-                    [/Textarea]<br />
-                    [br]<br />
-                    [Textarea]<br />
-                    [size=85][b]VEHÍCULO[/b][/size]<br />
-                    [hr][/hr]<br />
-                    [size=85][b]NÚMERO DE MATRÍCULA:[/b][/size] 545ASD [color=transparent]--[/color] [size=85][b]MODELO:[/b][/size] Dinka Blista [color=transparent]--[/color] [size=85][b]COLOR:[/b][/size] Blanco [color=transparent]--[/color] [size=85][b]PROPIETARIO REGISTRADO:[/b][/size] John Doe<br />
-                    [size=85][b]ESTADO:[/b][/size] Robado<br />
-                    [size=85][b]DESCRIPCIÓN DE DAÑOS:[/b][/size] Daño en faro trasero.<br />
-                    [/Textarea]<br />
-                    [Textarea]<br />
-                    [size=85][b]VEHÍCULO[/b][/size]<br />
-                    [hr][/hr]<br />
-                    [size=85][b]NÚMERO DE MATRÍCULA:[/b][/size] 545ASD [color=transparent]--[/color] [size=85][b]MODELO:[/b][/size] Dinka Blista [color=transparent]--[/color] [size=85][b]COLOR:[/b][/size] Blanco [color=transparent]--[/color] [size=85][b]PROPIETARIO REGISTRADO:[/b][/size] John Doe<br />
-                    [size=85][b]ESTADO:[/b][/size] Robado<br />
-                    [size=85][b]DESCRIPCIÓN DE DAÑOS:[/b][/size] Daño en faro trasero.<br />
-                    [/Textarea]<br />
-                    [br]<br />
-                    [Textareagrey]NARRATIVA DEL INCIDENTE[/Textareagrey]<br />
-                    [Textarea]Redactar acá[/Textarea]<br />
-                    [br]<br />
-                    [Textareagrey]SECCIÓN DE EVIDENCIAS[/Textareagrey]<br />
-                    [Textarea]Adjunte sus evidencias acá[/Textarea]<br />
+                <div className="code--section">
+                    <button className="primary--btn">Copiar Título</button>
+                    <button className="primary--btn" onClick={copyCode}>Copiar Código</button>
+                    <div className="bbcode">
+                        [Textarea]<br />
+                        [divbox=#3D6641]<br />
+                        [br]<br />
+                        [color=#FFFFFF]<br />
+                        [center]COUNTY OF LOS SANTOS SHERIFF'S DEPARTMENT[/center]<br />
+                        [align=center][b]REPORTE DE INCIDENTE[/b][/align]<br />
+                        [right][size=70][b]FECHA:[/b][/size][color=transparent]--[/color]10/17/2023[/right]<br />
+                        [/color]<br />
+                        [/divbox]<br />
+                        [size=70][color=transparent]---[/color]A TRADITION OF SERVICE[/size]<br />
+                        [br]<br />
+                        [Textarea]<br />
+                        [size=85][b]# ADULTOS ARRESTADOS:[/b][/size] 1<br />
+                        [size=85][b]CLASIFICACIÓN:[/b][/size] Homicidio<br />
+                        [size=85][b]FECHA/HORA/DÍA DE LO OCURRIDO:[/b][/size] 10-17-23, 1648, Martes<br />
+                        [size=85][b]DIRECCIÓN DE LO OCURRIDO:[/b][/size] 2363 Vespucci Boulevard, SA 97321<br />
+                        [size=85][b]NOMBRE DEL LUGAR (SI APLICA):[/b][/size] Bean Machine<br />
+                        [/Textarea]<br />
+                        [br]<br />
+                        [b][size=75]CÓDIGO: [color=transparent]--[/color] V - VÍCTIMA [color=transparent]--[/color] ° [color=transparent]--[/color] T - TESTIGO [color=transparent]--[/color] ° [color=transparent]--[/color] I - INFORMANTE[/size][/b]<br />
+                        [Textarea]<br />
+                        [size=85][b]CÓDIGO:[/b][/size] V<br />
+                        [size=85][b]APELLIDO:[/b][/size] Doe [color=transparent]--[/color] [size=85][b]NOMBRE:[/b][/size] John [color=transparent]--[/color] [size=85][b]SEXO:[/b][/size] Masculino [color=transparent]--[/color] [size=85][b]EDAD:[/b][/size] 37<br />
+                        [size=85][b]DIRECCIÓN DE RESIDENCIA:[/b][/size] 4565 Mangellan Avenue<br />
+                        [size=85][b]VÍCTIMA DE LAS OFENSAS:[/b][/size] Homicidio<br />
+                        [/Textarea]<br />
+                        [Textarea]<br />
+                        [size=85][b]CÓDIGO:[/b][/size] V<br />
+                        [size=85][b]APELLIDO:[/b][/size] Doe [color=transparent]--[/color] [size=85][b]NOMBRE:[/b][/size] John [color=transparent]--[/color] [size=85][b]SEXO:[/b][/size] Masculino [color=transparent]--[/color] [size=85][b]EDAD:[/b][/size] 37<br />
+                        [size=85][b]DIRECCIÓN DE RESIDENCIA:[/b][/size] 4565 Mangellan Avenue<br />
+                        [size=85][b]VÍCTIMA DE LAS OFENSAS:[/b][/size] Homicidio<br />
+                        [/Textarea]<br />
+                        [br]<br />
+                        [b][size=75]CÓDIGO: [color=transparent]--[/color] S - SOSPECHOSO [color=transparent]--[/color] ° [color=transparent]--[/color] P - PACIENTE [color=transparent]--[/color][/size][/b]<br />
+                        [Textarea]<br />
+                        [size=85][b]CÓDIGO:[/b][/size] S<br />
+                        [size=85][b]APELLIDO:[/b][/size] Doe [color=transparent]--[/color] [size=85][b]NOMBRE:[/b][/size] John [color=transparent]--[/color] [size=85][b]SEXO:[/b][/size] Masculino [color=transparent]--[/color] [size=85][b]EDAD:[/b][/size] 37<br />
+                        [size=85][b]DIRECCIÓN DE RESIDENCIA:[/b][/size] 4565 Mangellan Avenue<br />
+                        [hr][/hr]<br />
+                        [size=85][b]CARGOS:[/b][/size] 187 PC [color=transparent]--[/color] [size=85][b]NÚMERO DE BOOKING:[/b][/size] 65415<br />
+                        [/Textarea]<br />
+                        [Textarea]<br />
+                        [size=85][b]CÓDIGO:[/b][/size] S<br />
+                        [size=85][b]APELLIDO:[/b][/size] Doe [color=transparent]--[/color] [size=85][b]NOMBRE:[/b][/size] John [color=transparent]--[/color] [size=85][b]SEXO:[/b][/size] Masculino [color=transparent]--[/color] [size=85][b]EDAD:[/b][/size] 37<br />
+                        [size=85][b]DIRECCIÓN DE RESIDENCIA:[/b][/size] 4565 Mangellan Avenue<br />
+                        [hr][/hr]<br />
+                        [size=85][b]CARGOS:[/b][/size] 187 PC [color=transparent]--[/color] [size=85][b]NÚMERO DE BOOKING:[/b][/size] 65415<br />
+                        [/Textarea]<br />
+                        [br]<br />
+                        [Textarea]<br />
+                        [size=85][b]POR EL EMPLEADO:[/b][/size] Lopez, E. [color=transparent]--[/color] [size=85][b]NÚMERO DE EMPLEADO:[/b][/size] 51451 [color=transparent]--[/color] [size=85][b]UNIDAD/CARRO #:[/b][/size] 281A<br />
+                        [/Textarea]<br />
+                        [br]<br />
+                        [Textarea]<br />
+                        [size=85][b]VEHÍCULO[/b][/size]<br />
+                        [hr][/hr]<br />
+                        [size=85][b]NÚMERO DE MATRÍCULA:[/b][/size] 545ASD [color=transparent]--[/color] [size=85][b]MODELO:[/b][/size] Dinka Blista [color=transparent]--[/color] [size=85][b]COLOR:[/b][/size] Blanco [color=transparent]--[/color] [size=85][b]PROPIETARIO REGISTRADO:[/b][/size] John Doe<br />
+                        [size=85][b]ESTADO:[/b][/size] Robado<br />
+                        [size=85][b]DESCRIPCIÓN DE DAÑOS:[/b][/size] Daño en faro trasero.<br />
+                        [/Textarea]<br />
+                        [Textarea]<br />
+                        [size=85][b]VEHÍCULO[/b][/size]<br />
+                        [hr][/hr]<br />
+                        [size=85][b]NÚMERO DE MATRÍCULA:[/b][/size] 545ASD [color=transparent]--[/color] [size=85][b]MODELO:[/b][/size] Dinka Blista [color=transparent]--[/color] [size=85][b]COLOR:[/b][/size] Blanco [color=transparent]--[/color] [size=85][b]PROPIETARIO REGISTRADO:[/b][/size] John Doe<br />
+                        [size=85][b]ESTADO:[/b][/size] Robado<br />
+                        [size=85][b]DESCRIPCIÓN DE DAÑOS:[/b][/size] Daño en faro trasero.<br />
+                        [/Textarea]<br />
+                        [br]<br />
+                        [Textareagrey]NARRATIVA DEL INCIDENTE[/Textareagrey]<br />
+                        [Textarea]Redactar acá[/Textarea]<br />
+                        [br]<br />
+                        [Textareagrey]SECCIÓN DE EVIDENCIAS[/Textareagrey]<br />
+                        [Textarea]Adjunte sus evidencias acá[/Textarea]<br />
+                    </div>
                 </div>
             </section>
         </section>
