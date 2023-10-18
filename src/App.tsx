@@ -6,7 +6,7 @@ import Incidents from "./pages/Incidents";
 function App() {
   const router = createBrowserRouter([
     {
-      path: "",
+      path: "/",
       element: <Home/>
     },
     {
