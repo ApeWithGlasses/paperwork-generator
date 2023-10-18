@@ -164,6 +164,7 @@ const Incidents = () => {
 
                         <hr />
 
+                        // TODO: Add the rest of the registers
                         <div className="registerThree">
                             <label htmlFor="codeRegisterThree">Código</label>
                             <select name="codeRegisterThree" id="codeRegisterThree">
