@@ -55,4 +55,4 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
-          folder: dist/paperwork-generator-lssd
+          folder: dist
