@@ -150,7 +150,8 @@ button {
 }
 
 .converter--container .form form input, select, textarea {
-    height: 1.5rem;
+    min-height: 2.2rem;
+    height: 2.2rem;
     font-size: 0.9rem;
     border: 1px solid var(--secondary);
     border-radius: 0.3rem;
