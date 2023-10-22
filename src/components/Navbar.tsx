@@ -11,7 +11,7 @@ const Navbar = () => {
         <section className="left--section">
             <ul className="links">
                 <li><Link to={'/'}>Inicio</Link></li>
-                <li><Link to={'/incidents'}>Generador de Incidentes</Link></li>
+                <li><Link to={'/incidents'}>Generador Incidentes</Link></li>
             </ul>
         </section>
     </nav>

@@ -10,7 +10,7 @@ const Home = () => {
         <div className="title--container">
           <h2>Navegación Rápida</h2>
         </div>
-        <Link to={'/incidents'}>Generar Incidente</Link>
+        <Link to={'/incidents'}>Generar Reporte de Incidente</Link>
       </section>
     </>
   )
