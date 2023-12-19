@@ -10,45 +10,11 @@ moment.defineLocale('es', {
     weekdaysMin: 'Do_Lu_Ma_Mi_Ju_Vi_Sa'.split('_')
 });
 
-import Swal from "sweetalert2";
-
 import Navbar from "../components/Navbar"
+import { copyTitle } from "./utils/copyTitle";
+import { copyCode } from "./utils/copyCode";
 
 const Incidents = () => {
-
-    const copyCode = () => {
-        const code = document.querySelector('.bbcode') as HTMLDivElement;
-        const textArea = document.createElement('textarea');
-        textArea.value = code.innerText;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Texto copiado correctamente',
-            showConfirmButton: false,
-            timer: 1500
-        });
-    }
-
-    const copyTitle = () => {
-        const title = document.querySelector('.bbcode--title') as HTMLDivElement;
-        const textArea = document.createElement('textarea');
-        textArea.value = title.innerText;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Texto copiado correctamente',
-            showConfirmButton: false,
-            timer: 1500
-        });
-    }
 
     const [textareas, setTextareas] = useState(['', '']);
 

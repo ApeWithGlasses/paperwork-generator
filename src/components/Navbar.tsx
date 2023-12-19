@@ -12,6 +12,7 @@ const Navbar = () => {
             <ul className="links">
                 <li><Link to={'/'}>Inicio</Link></li>
                 <li><Link to={'/incidents'}>Generador Incidentes</Link></li>
+                <li><Link to={'/cases'}>Generador Casos OSSB</Link></li>
             </ul>
         </section>
     </nav>

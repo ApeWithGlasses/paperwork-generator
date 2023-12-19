@@ -11,6 +11,8 @@ const Home = () => {
           <h2>Navegación Rápida</h2>
         </div>
         <Link to={'/incidents'}>Generar Reporte de Incidente</Link>
+        <br />
+        <Link to={'/cases'}>Generar Informe de Caso</Link>
       </section>
     </>
   )
